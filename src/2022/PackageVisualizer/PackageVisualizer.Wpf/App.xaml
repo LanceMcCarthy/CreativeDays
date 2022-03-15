@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
              xmlns:converters="clr-namespace:PackageVisualizer.Wpf.Converters"
+             xmlns:models="clr-namespace:PackageVisualizer.Wpf.Models"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
@@ -40,25 +41,57 @@
                 <ResourceDictionary Source="/Telerik.Windows.Themes.Fluent;component/Themes/telerik.windows.controls.fixeddocumentviewers.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
-            <converters:ForegroundBrushConverter x:Key="ForegroundBrushConv" />
-            <converters:BackgroundBrushConverter x:Key="BackgroundBrushConv" />
-
             <ItemsPanelTemplate x:Key="TagsPanelTemplate">
                 <WrapPanel Orientation="Horizontal"
                            MaxWidth="1050" />
             </ItemsPanelTemplate>
 
-            <DataTemplate x:Key="TargetNameItemTemplate">
+            <Style x:Key="TfmCardBorderStyle"
+                   TargetType="Border">
+                <Setter Property="Background"
+                        Value="White" />
+                <Setter Property="BorderBrush"
+                        Value="#FF3178D3" />
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding IsAvailable}"
+                                 Value="True">
+                        <DataTrigger.Setters>
+                            <Setter Property="Background"
+                                    Value="#FF3178D3" />
+                            <Setter Property="BorderBrush"
+                                    Value="White" />
+                        </DataTrigger.Setters>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+
+            <Style x:Key="TfmCardTextBlockStyle"
+                   TargetType="TextBlock">
+                <Setter Property="Foreground"
+                        Value="Black" />
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding IsAvailable}"
+                                 Value="True">
+                        <DataTrigger.Setters>
+                            <Setter Property="Foreground"
+                                    Value="White" />
+                        </DataTrigger.Setters>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+
+            <DataTemplate x:Key="TargetNameItemTemplate"
+                          DataType="models:ItemVersion">
                 <Border Padding="5"
                         BorderThickness="1"
-                        BorderBrush="{Binding IsAvailable, Converter={StaticResource ForegroundBrushConv}}"
-                        Background="{Binding IsAvailable, Converter={StaticResource BackgroundBrushConv}}">
+                        Style="{StaticResource TfmCardBorderStyle}">
                     <TextBlock Text="{Binding Name}"
-                               Foreground="{Binding IsAvailable, Converter={StaticResource ForegroundBrushConv}}" />
+                               Style="{StaticResource TfmCardTextBlockStyle}"/>
                 </Border>
             </DataTemplate>
 
-            <DataTemplate x:Key="ProductsItemTemplate">
+            <DataTemplate x:Key="ProductsItemTemplate" 
+                          DataType="models:Item">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="110" />
@@ -69,14 +102,8 @@
 
                     <telerik:RadListBox ItemsSource="{Binding Versions}"
                                         ItemTemplate="{StaticResource TargetNameItemTemplate}"
-                                        Grid.Column="1">
-                        <telerik:RadListBox.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <WrapPanel Orientation="Horizontal"
-                                           MaxWidth="1050" />
-                            </ItemsPanelTemplate>
-                        </telerik:RadListBox.ItemsPanel>
-                    </telerik:RadListBox>
+                                        ItemsPanel="{StaticResource TagsPanelTemplate}"
+                                        Grid.Column="1"/>
                 </Grid>
             </DataTemplate>
         </ResourceDictionary>
