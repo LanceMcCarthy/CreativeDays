@@ -1,0 +1,53 @@
+﻿<Window x:Class="PackageVisualizer.Wpf.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+        xmlns:viewModels="clr-namespace:PackageVisualizer.Wpf.ViewModels"
+        Title="Package Visualizer"
+        Height="900"
+        Width="1200">
+
+    <Window.DataContext>
+        <viewModels:MainViewModel />
+    </Window.DataContext>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <telerik:RadListBox ItemsSource="{Binding TargetFrameworkMonikers}"
+                            ItemTemplate="{StaticResource ProductsItemTemplate}"
+                            Grid.Row="0"
+                            Grid.Column="0" />
+
+        <Grid Background="#FF3178D3" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <TextBox Text="{Binding FilePath, Mode=TwoWay}"
+                     Margin="5"
+                     Grid.Row="1"
+                     Grid.Column="0" />
+
+            <Button Content="Show Dependency TFMs"
+                    Command="{Binding LoadDependenciesCommand}"
+                    Margin="5"
+                    Background="White"
+                    Foreground="Black"
+                    Grid.Column="1" />
+
+            <!--<Button Content="Show TargetFrameworks"
+                Command="{Binding LoadTargetFrameworksCommand}"
+                Margin="5"
+                Grid.Row="1"
+                Grid.Column="2" />-->
+        </Grid>
+
+        
+    </Grid>
+</Window>

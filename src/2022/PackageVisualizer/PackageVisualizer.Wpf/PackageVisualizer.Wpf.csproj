@@ -1,0 +1,40 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <RootNamespace>PackageVisualizer.Wpf</RootNamespace>
+    <EnableDefaultItems>False</EnableDefaultItems>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommonHelpers" Version="1.1.3" />
+    <PackageReference Include="NuGet.Client" Version="4.2.0" />
+    <PackageReference Include="Telerik.UI.for.Wpf.60" Version="2022.1.222" />
+  </ItemGroup>
+  
+  <ItemGroup>
+  <ApplicationDefinition Include="App.xaml">
+    <Generator>MSBuild:Compile</Generator>
+    <SubType>Designer</SubType>
+  </ApplicationDefinition>
+  <Page Include="MainWindow.xaml">
+    <Generator>MSBuild:Compile</Generator>
+    <SubType>Designer</SubType>
+  </Page>
+  <Compile Include="App.xaml.cs">
+    <DependentUpon>App.xaml</DependentUpon>
+    <SubType>Code</SubType>
+  </Compile>
+  <Compile Include="Converters\BackgroundBrushConverter.cs" />
+  <Compile Include="Converters\ForegroundBrushConverter.cs" />
+  <Compile Include="MainWindow.xaml.cs">
+    <DependentUpon>MainWindow.xaml</DependentUpon>
+    <SubType>Code</SubType>
+  </Compile>
+  <Compile Include="Models\Item.cs" />
+  <Compile Include="Models\ItemVersion.cs" />
+  <Compile Include="ViewModels\MainViewModel.cs" />
+</ItemGroup>
+
+</Project>
