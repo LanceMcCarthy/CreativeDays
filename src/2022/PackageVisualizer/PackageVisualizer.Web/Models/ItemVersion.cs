@@ -1,6 +1,6 @@
 ﻿using CommonHelpers.Common;
 
-namespace PackageVisualizer.Wpf.Models
+namespace PackageVisualizer.Web.Models
 {
     public class ItemVersion : BindableBase
     {

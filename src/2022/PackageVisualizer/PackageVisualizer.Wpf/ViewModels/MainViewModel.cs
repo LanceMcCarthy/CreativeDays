@@ -8,6 +8,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Windows;
+using NuGet.Packaging.Core;
 
 namespace PackageVisualizer.Wpf.ViewModels
 {
@@ -61,6 +62,11 @@ namespace PackageVisualizer.Wpf.ViewModels
             {
                 var shortFolderName = dependencyGroup.TargetFramework.GetShortFolderName();
 
+                // The short folder name are missing the dot separator to get a match
+                shortFolderName = shortFolderName.Replace("net50", "net5.0");
+                shortFolderName = shortFolderName.Replace("net60", "net6.0");
+                shortFolderName = shortFolderName.Replace("net70", "net7.0");
+
                 if (!tfms.Contains(shortFolderName))
                 {
                     tfms.Add(shortFolderName);
@@ -68,14 +74,9 @@ namespace PackageVisualizer.Wpf.ViewModels
                     Console.WriteLine($"Added Dependency TFM: {shortFolderName}");
                 }
 
-                foreach (var item in listedFrameworks)
+                foreach (var iv in listedFrameworks.SelectMany(item => item.Versions.Where(iv => iv.Name == shortFolderName)))
                 {
-                    foreach (var iv in item.Versions.Where(iv => iv.Name == shortFolderName || iv.AlternateTfm == shortFolderName))
-                    {
-                        iv.IsAvailable = true;
-
-                        Console.WriteLine($"Enabled: {shortFolderName}");
-                    }
+                    iv.IsAvailable = true;
                 }
             }
 
@@ -118,22 +119,27 @@ namespace PackageVisualizer.Wpf.ViewModels
 
             foreach (var frameworkSpecificGroup in reader.NuspecReader.GetFrameworkReferenceGroups())
             {
-                var tfm = frameworkSpecificGroup.TargetFramework.GetShortFolderName();
+                var shortFolderName = frameworkSpecificGroup.TargetFramework.GetShortFolderName();
 
-                if (!tfms.Contains(tfm))
+                // The short folder name are missing the dot separator to get a match
+                shortFolderName = shortFolderName.Replace("net50", "net5.0");
+                shortFolderName = shortFolderName.Replace("net60", "net6.0");
+                shortFolderName = shortFolderName.Replace("net70", "net7.0");
+
+                if (!tfms.Contains(shortFolderName))
                 {
-                    tfms.Add(tfm);
+                    tfms.Add(shortFolderName);
 
-                    Console.WriteLine($"Added Target Framework: {tfm}");
+                    Console.WriteLine($"Added Target Framework: {shortFolderName}");
                 }
 
                 foreach (var item in listedFrameworks)
                 {
                     foreach (var itemVersion in item.Versions)
                     {
-                        Console.WriteLine($"{itemVersion.Name} - {tfm}");
+                        Console.WriteLine($"{itemVersion.Name} - {shortFolderName}");
 
-                        if (itemVersion.Name == tfm || itemVersion.AlternateTfm == tfm)
+                        if (itemVersion.Name == shortFolderName)
                         {
                             itemVersion.IsAvailable = true;
                         }
@@ -145,7 +151,7 @@ namespace PackageVisualizer.Wpf.ViewModels
             {
                 TargetFrameworkMonikers.Add(item);
             }
-
+            
             //if (tfms.Count > 0)
             //{
             //    var displayText = tfms.Aggregate("Target Frameworks:\r\n", (current, dependencyTarget) => current + $"- {dependencyTarget}\r\n");
@@ -153,6 +159,15 @@ namespace PackageVisualizer.Wpf.ViewModels
             //    MessageBox.Show(displayText);
             //}
         }
+
+        //private void GetPackageFiles()
+        //{
+        //    Console.WriteLine("Files:");
+        //    foreach (var file in reader.NuspecReader.GetFiles())
+        //    {
+        //        Console.WriteLine($" - {file}");
+        //    }
+        //}
 
         private void TrimDoubleQuotes()
         {

@@ -1,0 +1,42 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="row">
+    <div class="col-12">
+        @(Html.Kendo().Grid <PackageVisualizer.Web.Models.ItemViewModel>()
+            .Name("grid")
+            .Columns(columns =>
+            {
+                columns.Bound(p => p.ProductName);
+            })
+            .Pageable()
+            .Sortable()
+            .Scrollable()
+            .Filterable()
+            .HtmlAttributes(new { style = "height:550px;" })
+            .DataSource(dataSource => dataSource
+                .Ajax()
+                .Read(read => read.Action("Dependencies_Read", "Grid"))
+            )
+            .ClientDetailTemplateId("template")
+            )
+    </div>
+</div>
+
+<script id="template" type="text/kendo-tmpl">
+    # for (var i = 0; i < data.items.length; i++) { #
+        <div class="k-card #= data.items[i].IsAvailable == true ? 'dark' : '' #" style="width: 15em; margin:2%">
+            <div class="k-card-body">
+                <p class="k-card-title">#= data.items[i].Name #</p>
+            </div>
+        </div>
+    # } #
+</script>
+
+<style>
+    .dark{
+        background-color: #3178D3;
+        color: white;
+    }
+</style>

@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-using CommonHelpers.Common;
+﻿using CommonHelpers.Common;
 
-namespace PackageVisualizer.Wpf.Models;
+namespace PackageVisualizer.Web.Models;
 
-public class Item : BindableBase
+public class ItemViewModel : BindableBase
 {
     private string productName;
     private List<ItemVersion> versions;
@@ -20,11 +19,11 @@ public class Item : BindableBase
         set => SetProperty(ref versions, value);
     }
 
-    public static List<Item> ListTargetFrameworks()
+    public static List<ItemViewModel> ListTargetFrameworks()
     {
-        return new List<Item>
+        return new List<ItemViewModel>
         {
-            new Item
+            new ItemViewModel
             {
                 ProductName = ".NET",
                 Versions = new List<ItemVersion>
@@ -87,7 +86,7 @@ public class Item : BindableBase
                     }
                 }
             },
-            new Item
+            new ItemViewModel
             {
                 ProductName = ".NET Core",
                 Versions = new List<ItemVersion>
@@ -114,7 +113,7 @@ public class Item : BindableBase
                     }
                 }
             },
-            new Item
+            new ItemViewModel
             {
                 ProductName = ".NET Standard",
                 Versions = new List<ItemVersion>
@@ -129,7 +128,7 @@ public class Item : BindableBase
                     }
                 }
             },
-            new Item
+            new ItemViewModel
             {
                 ProductName = ".NET Framework",
                 Versions = new List<ItemVersion>
@@ -180,7 +179,7 @@ public class Item : BindableBase
                     }
                 }
             },
-            new Item
+            new ItemViewModel
             {
                 ProductName = "MonoAndroid",
                 Versions = new List<ItemVersion>
@@ -195,7 +194,7 @@ public class Item : BindableBase
                     }
                 }
             },
-            new Item
+            new ItemViewModel
             {
                 ProductName = "MonoMac",
                 Versions = new List<ItemVersion>
@@ -206,7 +205,7 @@ public class Item : BindableBase
                     }
                 }
             },
-            new Item
+            new ItemViewModel
             {
                 ProductName = "MonoTouch",
                 Versions = new List<ItemVersion>
@@ -217,7 +216,7 @@ public class Item : BindableBase
                     }
                 }
             },
-            new Item
+            new ItemViewModel
             {
                 ProductName = "Tizen",
                 Versions = new List<ItemVersion>
@@ -232,7 +231,7 @@ public class Item : BindableBase
                     }
                 }
             },
-            new Item
+            new ItemViewModel
             {
                 ProductName = "Xamarin.iOS",
                 Versions = new List<ItemVersion>
@@ -247,7 +246,7 @@ public class Item : BindableBase
                     }
                 }
             },
-            new Item
+            new ItemViewModel
             {
                 ProductName = "Xamain.Mac",
                 Versions = new List<ItemVersion>
@@ -262,7 +261,7 @@ public class Item : BindableBase
                     }
                 }
             },
-            new Item
+            new ItemViewModel
             {
                 ProductName = "Xamarin.TVOS",
                 Versions = new List<ItemVersion>
@@ -273,7 +272,7 @@ public class Item : BindableBase
                     }
                 }
             },
-            new Item
+            new ItemViewModel
             {
                 ProductName = "Xamarin.WatchOS",
                 Versions = new List<ItemVersion>
