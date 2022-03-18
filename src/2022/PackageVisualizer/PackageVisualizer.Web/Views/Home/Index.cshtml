@@ -25,18 +25,73 @@
 </div>
 
 <script id="template" type="text/kendo-tmpl">
-    # for (var i = 0; i < data.items.length; i++) { #
-        <div class="k-card #= data.items[i].IsAvailable == true ? 'dark' : '' #" style="width: 15em; margin:2%">
+
+
+<div class="k-listview-item k-content" style="width:70em; margin:auto">
+  <div class="cards">
+    # for (var i = 0; i < data.Versions.length; i++) { #
+        <div class="k-card #= data.Versions[i].IsAvailable == true ? 'dark' : 'light' #" style="margin:2%">
             <div class="k-card-body">
-                <p class="k-card-title">#= data.items[i].Name #</p>
+                <p class="k-card-title">#= data.Versions[i].Name #</p>
             </div>
         </div>
     # } #
+    </div>
+</div>
+
 </script>
 
-<style>
+<style type="text/css">
     .dark{
         background-color: #3178D3;
         color: white;
     }
+    .light {
+        background-color: white;
+        color: #3178D3;
+    }
 </style>
+
+@*
+    
+Trying to get nice little "github tag"-like boxes for the text that wrap horizontally
+Attempt 3
+ul.tag_cloud {
+    padding-left: 5px;
+}
+
+ul.tag_cloud li {
+    display: inline;
+    list-style-type: none;
+    margin: 5px;
+}
+<ul class="tag_cloud">
+    # for (var i = 0; i < data.Versions.length; i++) { #
+        <li>
+            <div class="#= data.Versions[i].IsAvailable == true ? 'dark' : 'light' #">
+                <p>#= data.Versions[i].Name #</p>
+            <div>
+        </li>
+    # } #
+</ul>
+
+Attempt 2
+<div class="k-card #= data.Versions[i].IsAvailable == true ? 'dark' : 'light' #" style="margin:2%">
+    <div class="k-card-body">
+        <p class="k-card-title">#= data.Versions[i].Name #</p>
+    </div>
+</div>
+
+Attempt 1
+<div class="k-listview-item k-content" style="width:70em; margin:auto">
+  <div class="cards">
+    # for (var i = 0; i < data.Versions.length; i++) { #
+        <div class="k-card #= data.Versions[i].IsAvailable == true ? 'dark' : 'light' #" style="margin:2%">
+            <div class="k-card-body">
+                <p class="k-card-title">#= data.Versions[i].Name #</p>
+            </div>
+        </div>
+    # } #
+    </div>
+</div>
+*@
