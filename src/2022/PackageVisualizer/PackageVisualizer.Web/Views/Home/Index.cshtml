@@ -20,75 +20,42 @@
     )
 
 <script id="template" type="text/kendo-tmpl">
-    <div class="k-listview-item k-content" style="width:70em; margin:auto">
-      <div class="cards">
+<tr>
+    <td></td>
+    <td>
         # for (var i = 0; i < data.Versions.length; i++) { #
-            <div class="k-card #= data.Versions[i].IsAvailable == true ? 'dark' : 'light' #" style="margin:2%">
-                <div class="k-card-body">
-                    <p class="k-card-title">#= data.Versions[i].Name #</p>
-                </div>
-            </div>
+            <span class="framework-table-margin #= data.Versions[i].IsAvailable == true ? 'framework-badge-asset' : 'framework-badge-computed' #">
+                #= data.Versions[i].Name #
+            </span>
         # } #
-        </div>
-    </div>
+    </td>
+</tr>
 </script>
 
 <style type="text/css">
-    .dark{
-        background-color: #3178D3;
-        color: white;
+    .framework-badge-computed {
+        padding: 1px 8px;
+        border-radius: 2px;
+        -webkit-box-pack: center;
+        -webkit-justify-content: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        display: inline-block;
+        border: 1px solid #0078d4;
+        background: rgba(0,120,212,.1);
+        margin: 0 8px 8px 0;
     }
-    .light {
-        background-color: white;
-        color: #3178D3;
+    .framework-badge-asset {
+        padding: 1px 8px;
+        border-radius: 2px;
+        -webkit-box-pack: center;
+        -webkit-justify-content: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        display: inline-block;
+        border: 1px solid #0078d4;
+        background: #0078d4;
+        color: #fff;
+        margin: 0 8px 8px 0;
     }
 </style>
-
-@*
-    
-Trying to get nice little "github tag"-like boxes for the text that wrap horizontally
-
-*** Attempt 3 ***
-ul.tag_cloud {
-    padding-left: 5px;
-}
-
-ul.tag_cloud li {
-    display: inline;
-    list-style-type: none;
-    margin: 5px;
-}
-<ul class="tag_cloud">
-    # for (var i = 0; i < data.Versions.length; i++) { #
-        <li>
-            <div class="#= data.Versions[i].IsAvailable == true ? 'dark' : 'light' #">
-                <p>#= data.Versions[i].Name #</p>
-            <div>
-        </li>
-    # } #
-</ul>
-
-
-*** Attempt 2 ***
-
-<div class="k-card #= data.Versions[i].IsAvailable == true ? 'dark' : 'light' #" style="margin:2%">
-    <div class="k-card-body">
-        <p class="k-card-title">#= data.Versions[i].Name #</p>
-    </div>
-</div>
-
-
-*** Attempt 1 ***
-
-<div class="k-listview-item k-content" style="width:70em; margin:auto">
-  <div class="cards">
-    # for (var i = 0; i < data.Versions.length; i++) { #
-        <div class="k-card #= data.Versions[i].IsAvailable == true ? 'dark' : 'light' #" style="margin:2%">
-            <div class="k-card-body">
-                <p class="k-card-title">#= data.Versions[i].Name #</p>
-            </div>
-        </div>
-    # } #
-    </div>
-</div>
-*@
