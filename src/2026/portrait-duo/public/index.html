@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f8f7f3">
+    <meta name="description" content="Un appel vidéo, deux crayons. Dessinez vos portraits en direct dans un atelier créatif à deux.">
+    <title>duo. — Dessinez-vous un moment.</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="/style.css">
+    <script src="/config.js"></script>
+    <script type="module" src="/app.js"></script>
+  </head>
+  <body>
+    <svg class="icon-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <symbol id="i-pen" viewBox="0 0 24 24"><path d="m15 5 4 4M4 20l5-1L20 8a2.8 2.8 0 0 0-4-4L5 15zM4 20l1-5"/></symbol>
+      <symbol id="i-eraser" viewBox="0 0 24 24"><path d="m14 3 7 7-10 10H7l-5-5zM8 9l7 7M11 20h11"/></symbol>
+      <symbol id="i-undo" viewBox="0 0 24 24"><path d="m8 4-5 5 5 5M3 9h11a6 6 0 0 1 0 12"/></symbol>
+      <symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18M9 6V3h6v3M5 6l1 15h12l1-15M10 10v7m4-7v7"/></symbol>
+      <symbol id="i-link" viewBox="0 0 24 24"><path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l5-5a4 4 0 0 1 6 0m0 12a4 4 0 0 0 6 0l5-5a4 4 0 0 0-6-6l-1 1" transform="translate(0 0) scale(.95)"/></symbol>
+      <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6"/></symbol>
+      <symbol id="i-camera" viewBox="0 0 24 24"><rect x="2" y="5" width="13" height="14" rx="3"/><path d="m15 9 7-4v14l-7-4"/></symbol>
+      <symbol id="i-mic" viewBox="0 0 24 24"><rect x="9" y="2" width="6" height="13" rx="3"/><path d="M5 10v2a7 7 0 0 0 14 0v-2m-7 9v3m-4 0h8"/></symbol>
+      <symbol id="i-phone" viewBox="0 0 24 24"><path d="M3 15v-4c5-5 13-5 18 0v4h-5v-4a14 14 0 0 0-8 0v4z"/></symbol>
+      <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></symbol>
+      <symbol id="i-spark" viewBox="0 0 24 24"><path d="m12 2 2.5 7.5L22 12l-7.5 2.5L12 22l-2.5-7.5L2 12l7.5-2.5z"/></symbol>
+      <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="7" r="3"/><path d="M2 21v-3a7 7 0 0 1 14 0v3M16 4a3 3 0 0 1 0 6m3 4a6 6 0 0 1 3 5v2"/></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L20 5"/></symbol>
+    </svg>
+
+    <header class="site-header">
+      <a class="brand" href="/" aria-label="duo, accueil"><span class="brand-mark"><svg><use href="#i-pen"/></svg></span>duo<span class="brand-dot">.</span></a>
+      <span class="header-note">Un trait nous rapproche.</span>
+      <nav aria-label="Navigation principale">
+        <button class="text-button" id="how-button">Comment ça marche <span class="question-mark">?</span></button>
+        <span class="nav-divider"></span>
+        <button class="join-button" id="join-button">Rejoindre un salon <svg><use href="#i-arrow"/></svg></button>
+      </nav>
+    </header>
+
+    <main>
+      <section class="intro" aria-labelledby="main-title">
+        <div class="eyebrow"><span></span> L'ATELIER À DEUX, EN TEMPS RÉEL</div>
+        <h1 id="main-title">Deux regards. <span>Un coup de crayon<svg viewBox="0 0 460 18" preserveAspectRatio="none" aria-hidden="true"><path d="M4 11Q180-2 454 7M46 16Q250 5 420 13"/></svg>.</span></h1>
+        <p>Un appel vidéo, quelques couleurs, et vous deux.<br class="mobile-break"> Dessinez vos portraits, pas besoin de savoir dessiner.</p>
+        <span class="intro-doodle" aria-hidden="true">✳</span>
+      </section>
+
+      <section class="studio" aria-label="Atelier de dessin partagé">
+        <div class="studio-heading">
+          <div class="studio-title"><span class="studio-icon"><svg><use href="#i-spark"/></svg></span><h2>Votre petit atelier</h2><span class="live-badge" id="connection-status"><span></span>Connexion…</span></div>
+          <div class="room-actions"><span class="room-code">SALON <strong id="room-code">—</strong></span><button class="primary-button invite-button" data-invite><svg><use href="#i-link"/></svg>Inviter un ami</button></div>
+        </div>
+
+        <div class="video-grid">
+          <article class="portrait-card" id="local-card">
+            <div class="card-heading"><div><span class="person-dot local-dot"></span><h3>Vous</h3><span class="card-tag">L'artiste, c'est vous</span></div><span class="media-label" id="local-media-label">Caméra éteinte</span></div>
+            <div class="video-stage local-stage">
+              <video id="local-video" autoplay playsinline muted></video>
+              <div class="placeholder local-placeholder" id="local-placeholder">
+                <svg class="portrait-art" viewBox="0 0 340 290" fill="none" aria-hidden="true">
+                  <path d="M51 239c-15-31-10-78 3-112C75 68 130 31 186 41c62 11 109 74 105 130-4 68-77 108-150 97-38-5-76-5-90-29" fill="#eac9a8"/>
+                  <path d="M93 286c0-49 25-64 56-72l43-1c43 9 59 32 64 73" fill="#a6a583"/>
+                  <path d="M143 193v28c4 22 42 21 47-2v-32" fill="#efb68c" stroke="#714b3d" stroke-width="2.5"/>
+                  <path d="M109 119c-13 1-14 28 1 31m107-31c16-2 16 28 0 31" fill="#efb68c" stroke="#714b3d" stroke-width="2.5"/>
+                  <path d="M108 101c-3 54 3 103 55 107 52 3 60-47 56-106l-48-36z" fill="#f3c7a5" stroke="#714b3d" stroke-width="2.5"/>
+                  <path d="M105 128c-14-26-16-64 13-72 4-26 49-36 74-15 33-1 50 38 29 85l-9-33c-28 3-54-4-67-18-4 17-17 26-31 28z" fill="#534132"/>
+                  <path d="M125 124c6-4 12-4 18-1m39 0c6-4 12-4 18 0" stroke="#714b3d" stroke-width="3" stroke-linecap="round"/>
+                  <path d="M139 135v5m49-5v5m-24-2-5 23h10m-21 14c10 9 23 9 33-1" stroke="#714b3d" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="m105 248-12 37m129-36 10 36" stroke="#777b5c" stroke-width="2.5"/>
+                  <path d="m61 84 6-15m-24 35-13-3m244 105 14 5" stroke="#a97850" stroke-width="2.5" stroke-linecap="round"/>
+                  <path d="M124 132c-10-13 20-23 27-9 5 16-21 22-27 9Zm50-6c2-15 31-15 31 0 0 17-32 19-31 0Zm-23 0 23-1" stroke="#9272d1" stroke-width="4" stroke-linecap="round"/>
+                  <path d="m264 65 3-13 4 12 12 3-12 4-4 12-3-12-12-4z" stroke="#9272d1" stroke-width="2.5"/>
+                </svg>
+                <div class="camera-prompt"><button class="camera-start" id="start-camera"><svg><use href="#i-camera"/></svg>Activer ma caméra</button><span>En attendant, essayez les crayons !</span></div>
+              </div>
+              <canvas id="local-canvas" aria-label="Dessiner sur votre vidéo"></canvas>
+              <span class="canvas-caption"><span></span> Votre toile</span>
+              <button class="canvas-visibility" data-visibility="local" title="Masquer les dessins" aria-label="Masquer les dessins de votre toile">Dessin visible</button>
+            </div>
+            <div class="drawing-toolbar" data-toolbar="local" aria-label="Outils de votre toile"></div>
+          </article>
+
+          <div class="between-doodle" aria-hidden="true"><svg viewBox="0 0 45 45"><path d="M5 23c8-13 25-13 34-1m-7-8 8 8-10 3M39 32c-9 7-23 7-32-1m4 8-6-8 9-3"/></svg></div>
+
+          <article class="portrait-card" id="remote-card">
+            <div class="card-heading"><div><span class="person-dot remote-dot"></span><h3>Votre complice</h3><span class="card-tag" id="remote-tag">La place est libre</span></div><button class="sound-button" id="enable-sound" hidden>Activer le son</button><span class="media-label" id="remote-media-label">En attente</span></div>
+            <div class="video-stage remote-stage">
+              <video id="remote-video" autoplay playsinline></video>
+              <div class="placeholder remote-placeholder" id="remote-placeholder">
+                <div class="empty-art" aria-hidden="true"><svg viewBox="0 0 230 170" fill="none"><path d="M55 126C20 95 39 42 83 32c44-11 110 6 113 54s-98 77-141 40" fill="#e0d9ef"/><rect x="59" y="30" width="103" height="117" rx="9" transform="rotate(-9 59 30)" fill="#f6f2fd" stroke="#b9a7d6" stroke-width="2"/><path d="M87 130c-1-24 44-33 53-8m-47-43c-4-30 41-34 40-5 0 24-35 33-40 5" stroke="#9e87c3" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="5 6"/><path d="m178 31 3-12 4 12 12 4-12 4-4 11-3-11-12-4zM43 113l-10 4m15 4-4 9" stroke="#aa94c9" stroke-width="2" stroke-linecap="round"/></svg><span class="little-star">✧</span></div>
+                <h4 id="remote-placeholder-title">À deux, c'est encore mieux.</h4>
+                <p id="remote-placeholder-text">Invitez votre complice et laissez<br>parler vos coups de crayon.</p>
+                <button class="soft-button" data-invite><svg><use href="#i-link"/></svg>Copier le lien d'invitation</button>
+                <span class="no-account">Pas de compte. Juste un lien.</span>
+              </div>
+              <canvas id="remote-canvas" aria-label="Dessiner sur la vidéo de votre complice"></canvas>
+              <span class="canvas-caption"><span></span> Sa toile, vos idées</span>
+              <button class="canvas-visibility" data-visibility="remote" title="Masquer les dessins" aria-label="Masquer les dessins de votre complice">Dessin visible</button>
+            </div>
+            <div class="drawing-toolbar" data-toolbar="remote" aria-label="Outils de la toile de votre complice"></div>
+          </article>
+        </div>
+
+        <div class="studio-bottom">
+          <span class="drawing-hint"><svg><use href="#i-pen"/></svg>Un crayon par toile. Une infinité de possibilités.</span>
+          <div class="call-controls" aria-label="Commandes de l’appel">
+            <button id="toggle-camera" aria-label="Activer la caméra" aria-pressed="false" title="Activer la caméra"><svg><use href="#i-camera"/></svg><span class="off-slash"></span></button>
+            <button id="toggle-mic" aria-label="Activer le micro" aria-pressed="false" title="Activer le micro"><svg><use href="#i-mic"/></svg><span class="off-slash"></span></button>
+            <span class="control-divider"></span>
+            <button class="hangup" id="hangup" aria-label="Quitter le salon" title="Quitter le salon"><svg><use href="#i-phone"/></svg></button>
+          </div>
+          <button class="capture-button" id="capture"><svg><use href="#i-download"/></svg>Capturer le duo</button>
+        </div>
+      </section>
+
+      <div class="atelier-note"><span class="note-spark">✳</span><p>Le plus beau portrait ?<br><strong>Celui qui vous fait sourire.</strong></p><span class="note-line" aria-hidden="true">↗</span></div>
+      <footer><span>Fait pour créer des liens. Et quelques gribouillis.</span><span class="privacy-note"><span></span>Vos vidéos restent entre vous.</span><span>Moins de filtres, plus de feutres <span class="footer-flower">✿</span></span></footer>
+    </main>
+
+    <dialog id="how-dialog">
+      <button class="dialog-close" aria-label="Fermer">×</button><span class="dialog-eyebrow">BONJOUR LES ARTISTES</span><h2>Un lien. Deux artistes.<br>Zéro pression.</h2>
+      <ol class="how-steps"><li><strong>Invitez votre complice</strong><p>Copiez le lien de votre salon et envoyez-le à la personne de votre choix.</p></li><li><strong>Faites-vous face</strong><p>Activez vos caméras et vos micros. Vos deux vidéos s’affichent côte à côte.</p></li><li><strong>Sortez les crayons</strong><p>Dessinez sur l’une ou l’autre des vidéos. Chaque toile a ses couleurs et sa taille de trait. Vos dessins se partagent en direct.</p></li></ol><p class="dialog-footnote">La gomme efface seulement les dessins, jamais la vidéo. Capturez le duo pour garder un souvenir.</p>
+    </dialog>
+    <dialog id="join-dialog">
+      <button class="dialog-close" aria-label="Fermer">×</button><span class="dialog-eyebrow">VOTRE COMPLICE VOUS ATTEND</span><h2>Entrez dans l’atelier.</h2>
+      <form id="join-form"><label for="invite-input">Lien d’invitation ou code du salon</label><input id="invite-input" name="invitation" placeholder="Collez votre lien ou votre code" required autocomplete="off"><p class="form-error" id="join-error" role="alert"></p><button class="primary-button" type="submit">Rejoindre le salon <svg><use href="#i-arrow"/></svg></button></form>
+    </dialog>
+    <dialog id="copy-dialog"><button class="dialog-close" aria-label="Fermer">×</button><h2>Votre invitation</h2><p>La copie automatique est indisponible. Copiez ce lien pour inviter votre complice.</p><input id="copy-input" readonly aria-label="Lien d’invitation"></dialog>
+    <dialog id="confirm-dialog"><h2 id="confirm-title"></h2><p id="confirm-text"></p><div class="dialog-actions"><button class="soft-button" id="confirm-cancel">Annuler</button><button class="primary-button" id="confirm-ok">Confirmer</button></div></dialog>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>

@@ -1,0 +1,25 @@
+{
+  "name": "portrait-duo",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Un atelier de portraits à deux, en vidéo et en temps réel.",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "build": "node build.js",
+    "test": "node --test test/server.test.js",
+    "test:e2e": "playwright test"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "socket.io": "^4.8.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.56.1",
+    "socket.io-client": "^4.8.1"
+  }
+}

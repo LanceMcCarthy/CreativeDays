@@ -2,6 +2,10 @@
 
 A repository of PoC projects and other assets for Creative Days.
 
+## 2026 - duo. Portraits à deux
+
+[duo.](src/2026/portrait-duo/README.md) is a real-time, two-person video drawing app with side-by-side videos, independent drawing toolbars, and shareable room URLs. Its README includes local setup and deployment options for `https://creative-day.pages.dktapp.cloud/`.
+
 ## 2022 - NuGet Package Visualizer
 
 This project will scan a NuGet package and list the dependencies target frameworks. The intention is to add highly desired functionality to nuget.telerik.com. Where going to an endpoint like `nuget.telerik.com/visualizer` would provide our customers with same kind of dependency awareness features that developers have come to expect from nuget.org-based packages.
